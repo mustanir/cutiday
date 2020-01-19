@@ -95,7 +95,7 @@ export default function App() {
             <Typography variant="h4" component="h1" gutterBottom>
               Find your ideal travel package
             </Typography>
-            <img src={require("../images/cutiday.png")} width="211" height="70"/>
+            <img src={require("./images/cutiday.png")} width="211" height="70"/>
           </Box>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
