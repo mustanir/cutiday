@@ -9,6 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import PeopleIcon from '@material-ui/icons/People';
+import {Pakej} from './Pakej'
 import {
   MuiPickersUtilsProvider,
   DatePicker,
@@ -52,7 +53,7 @@ export function Home() {
         <Typography variant="h4" component="h1" gutterBottom>
           Find your ideal travel package
         </Typography>
-        <img src={require("./images/cutiday.png")} width="211" height="70" alt="logo"/>
+        <img src={require("../../images/cutiday.png")} width="211" height="70" alt="logo"/>
       </Box>
       <form className={classes.form} noValidate>
         <Grid container spacing={2}>
@@ -125,6 +126,7 @@ export function Home() {
           </Grid>
         </Grid>
       </form>
+      <Pakej />
       <Copyright />
     </Container>
   );
