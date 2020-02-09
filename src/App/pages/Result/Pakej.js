@@ -5,11 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import PeopleIcon from '@material-ui/icons/People';
-import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: "5%",
+    marginTop: "2%",
     padding: theme.spacing(2),
     margin: 'auto',
     maxWidth: 500,
@@ -26,21 +25,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function Pakej() {
+export function Pakej(props) {
   const classes = useStyles();
 
   const [pakej, setPakej] = React.useState([]);
+  const [pakejResult, setPakejResult] = React.useState([]);
 
-  async function fetchPakej() {
-      const res = await fetch("/api/getPakej");
-      res
-        .json()
-        .then(pakej => setPakej(pakej))
-    }
+  React.useEffect(() => {
+      fetch("/api/getPakej")
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Something went wrong");
+          }
+        })
+        .then(jsonResponse => {
+          setPakej(jsonResponse);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, []
+  );
 
   React.useEffect(() =>  {
-    fetchPakej()
-  }, []);
+    const results = pakej.filter(item =>
+      item.location.toLowerCase().includes(props.destination)
+    );
+    setPakejResult(results);
+  }, [props.destination]);
 
   return (
     <div>
@@ -50,7 +64,7 @@ export function Pakej() {
       {
         pakej.map((item) => {
           return(
-            <Paper className={classes.paper}>
+            <Paper key={item.id} className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item>
                   <ButtonBase className={classes.image}>

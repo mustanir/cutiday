@@ -9,7 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import PeopleIcon from '@material-ui/icons/People';
-import {Pakej} from './Pakej'
+import { useHistory } from 'react-router-dom';
 import {
   MuiPickersUtilsProvider,
   DatePicker,
@@ -38,11 +38,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function Home() {
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+export function Home(props) {
+  const history = useHistory();
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+  const handleClick = () => {
+    history.push("/result");
   };
 
   const classes = useStyles();
@@ -59,11 +59,12 @@ export function Home() {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              autoComplete="destination"
               name="destination"
               variant="outlined"
               required
               fullWidth
+              value={props.destination}
+              onChange={props.changeDestination}
               id="destination"
               label="Enter a Destination or Theme"
               autoFocus
@@ -79,8 +80,8 @@ export function Home() {
                 id="start-date"
                 label="Start Date"
                 fullWidth
-                value={selectedDate}
-                onChange={handleDateChange}
+                value={props.fromdate}
+                onChange={props.changeFromDate}
                 keyboardbuttonprops={{
                   'aria-label': 'change date',
                 }}
@@ -95,8 +96,8 @@ export function Home() {
                 label="End Date"
                 format="dd/MM/yyyy"
                 fullWidth
-                value={selectedDate}
-                onChange={handleDateChange}
+                value={props.todate}
+                onChange={props.changeToDate}
                 keyboardbuttonprops={{
                   'aria-label': 'change date',
                 }}
@@ -110,6 +111,8 @@ export function Home() {
              label="No. of Pax"
              variant="outlined"
              fullWidth
+             value={props.pax}
+             onChange={props.changePax}
              InputProps={{
                startAdornment: (
                  <InputAdornment position="start">
@@ -120,13 +123,12 @@ export function Home() {
            />
           </Grid>
           <Grid item xs={12}>
-            <Button fullWidth size="large" variant="contained" color="primary">
+            <Button onClick={handleClick} fullWidth size="large" variant="contained" color="primary">
               Search
             </Button>
           </Grid>
         </Grid>
       </form>
-      <Pakej />
       <Copyright />
     </Container>
   );

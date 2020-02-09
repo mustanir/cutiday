@@ -22,18 +22,16 @@ export function Navbar() {
   const classes = useStyles();
 
   return(
-    <div>
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-          </Typography>
-          <LoginDialog />
-          <RegisterDialog />
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static" color="primary">
+      <Toolbar>
+        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" className={classes.title}>
+        </Typography>
+        <LoginDialog />
+        <RegisterDialog />
+      </Toolbar>
+    </AppBar>
   );
 }
