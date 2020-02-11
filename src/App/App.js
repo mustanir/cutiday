@@ -2,8 +2,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import {
   createMuiTheme,
@@ -11,6 +10,7 @@ import {
   makeStyles
 } from '@material-ui/core/styles';
 import {Home} from './pages/Home/Home'
+import {Result} from './pages/Result/Result'
 import {Navbar} from './pages/Navbar/Navbar'
 
 const theme = createMuiTheme({
@@ -20,6 +20,8 @@ const theme = createMuiTheme({
       main: '#d50000',
       dark: '#9b0000',
       contrastText: '#fff',
+      gray: '#bdbdbd',
+      white: '#fafafa',
     },
     secondary: {
       light: '#6d6d6d',
@@ -37,24 +39,53 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function App() {
+  const [selectedPax, setSelectedPax] = React.useState(0);
+
+  const handlePaxChange = pax => {
+    setSelectedPax(pax.target.value);
+  };
+
+  const [selectedDestination, setSelectedDestination] = React.useState('');
+
+  const handleDestinationChange = destination => {
+    setSelectedDestination(destination.target.value);
+  };
+
+  const [selectedFromDate, setSelectedFromDate] = React.useState(new Date());
+
+  const handleFromDateChange = date => {
+    setSelectedFromDate(date.target.value);
+  };
+
+  const [selectedToDate, setSelectedToDate] = React.useState(new Date());
+
+  const handleToDateChange = date => {
+    setSelectedToDate(date.target.value);
+  };
 
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
+    <div className={classes.root}>
+      <ThemeProvider theme={theme}>
         <Navbar />
         <Router>
-            <Switch>
-              <Route path="/" component={Home}>
-              </Route>
-              <Route path="/about">
-              </Route>
-              <Route path="/users">
-              </Route>
-            </Switch>
+          <Switch>
+            <Route exact path="/">
+              <Home destination={selectedDestination} changeDestination={handleDestinationChange}
+                    fromdate={selectedFromDate} changeFromDate={handleFromDateChange}
+                    todate={selectedToDate} changeToDate={handleToDateChange}
+                    pax={selectedPax} changePax={handlePaxChange} />
+            </Route>
+            <Route path="/result">
+              <Result destination={selectedDestination} changeDestination={handleDestinationChange}
+                  fromdate={selectedFromDate} changeFromDate={handleFromDateChange}
+                  todate={selectedToDate} changeToDate={handleToDateChange}
+                  pax={selectedPax} changePax={handlePaxChange} />
+            </Route>
+          </Switch>
         </Router>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   );
 }
