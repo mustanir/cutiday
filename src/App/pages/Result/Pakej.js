@@ -54,7 +54,11 @@ export function Pakej(props) {
   React.useEffect(() =>  {
     if (isFetch === true){
       const results = pakej.filter(item =>
-        item.location.toLowerCase().includes(props.destination)
+        (!props.destination || item.location.toLowerCase().includes(props.destination)) &&
+        (props.pax !== 0 || item.pax === props.pax) 
+        //((!props.fromdate && !props.todate) ||
+        //  (props.fromdate >= item.dateavailablestart &&
+        //  props.todate <= item.dateavailableend))
       );
       setPakejResult(results);
     }
