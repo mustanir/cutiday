@@ -30,6 +30,7 @@ export function Pakej(props) {
 
   const [pakej, setPakej] = React.useState([]);
   const [pakejResult, setPakejResult] = React.useState([]);
+  const [isFetch, setIsFetch] = React.useState(false);
 
   React.useEffect(() => {
       fetch("/api/getPakej")
@@ -42,6 +43,7 @@ export function Pakej(props) {
         })
         .then(jsonResponse => {
           setPakej(jsonResponse);
+          setIsFetch(true);
         })
         .catch(error => {
           console.log(error);
@@ -50,19 +52,25 @@ export function Pakej(props) {
   );
 
   React.useEffect(() =>  {
-    const results = pakej.filter(item =>
-      item.location.toLowerCase().includes(props.destination)
-    );
-    setPakejResult(results);
-  }, [props.destination]);
+    if (isFetch === true){
+      const results = pakej.filter(item =>
+        (!props.destination || item.location.toLowerCase().includes(props.destination)) &&
+        (props.pax !== 0 || item.pax === props.pax) 
+        //((!props.fromdate && !props.todate) ||
+        //  (props.fromdate >= item.dateavailablestart &&
+        //  props.todate <= item.dateavailableend))
+      );
+      setPakejResult(results);
+    }
+  }, [isFetch]);
 
   return (
     <div>
     {
-      pakej.length ? (
+      pakejResult.length ? (
       <div>
       {
-        pakej.map((item) => {
+        pakejResult.map((item) => {
           return(
             <Paper key={item.id} className={classes.paper}>
               <Grid container spacing={2}>

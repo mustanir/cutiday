@@ -1,14 +1,9 @@
 import React from 'react';
 import { Pakej } from './Pakej';
 import { Navbar2 } from './Navbar2';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-
-}));
 
 export function Result(props) {
-  const classes = useStyles();
 
   return (
     <div>

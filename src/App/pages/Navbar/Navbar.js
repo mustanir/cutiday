@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import {  makeStyles } from '@material-ui/core/styles';
 import { LoginDialog } from './LoginDialog';
 import { RegisterDialog } from './RegisterDialog';
+import { PakejDialog } from './PakejDialog';
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -31,6 +32,7 @@ export function Navbar() {
         </Typography>
         <LoginDialog />
         <RegisterDialog />
+        <PakejDialog />
       </Toolbar>
     </AppBar>
   );
