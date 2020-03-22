@@ -51,17 +51,8 @@ export default function App() {
     setSelectedDestination(destination.target.value);
   };
 
-  const [selectedFromDate, setSelectedFromDate] = React.useState(new Date());
-
-  const handleFromDateChange = date => {
-    setSelectedFromDate(date.target.value);
-  };
-
-  const [selectedToDate, setSelectedToDate] = React.useState(new Date());
-
-  const handleToDateChange = date => {
-    setSelectedToDate(date.target.value);
-  };
+  const [selectedFromDate, handleFromDateChange] = React.useState(new Date());
+  const [selectedToDate, handleToDateChange] = React.useState(new Date());
 
   const classes = useStyles();
 

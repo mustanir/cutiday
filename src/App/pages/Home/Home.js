@@ -75,6 +75,7 @@ export function Home(props) {
               <DatePicker
                 variant="inline"
                 inputVariant="outlined"
+                autoOk="true"
                 format="dd/MM/yyyy"
                 margin="normal"
                 id="start-date"
@@ -92,6 +93,7 @@ export function Home(props) {
                 margin="normal"
                 variant="inline"
                 inputVariant="outlined"
+                autoOk="true"
                 id="end-date"
                 label="End Date"
                 format="dd/MM/yyyy"
