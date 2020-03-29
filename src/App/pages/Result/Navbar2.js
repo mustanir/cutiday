@@ -59,6 +59,10 @@ export function Navbar2(props) {
     history.push("/");
   };
 
+  const handleButtonClick = () => {
+    history.push("/result");
+  };
+
   return(
     <AppBar position="static" className={classes.appbar}>
       <Toolbar>
@@ -129,7 +133,7 @@ export function Navbar2(props) {
            />
         </div>
         <div className={classes.searchButton}>
-          <Button size="large" variant="contained" color="primary">
+          <Button onClick={handleButtonClick} size="large" variant="contained" color="primary">
             Search
           </Button>
         </div>
