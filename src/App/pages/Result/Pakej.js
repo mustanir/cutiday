@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import PeopleIcon from '@material-ui/icons/People';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -54,11 +56,10 @@ export function Pakej(props) {
   React.useEffect(() =>  {
     if (isFetch === true){
       const results = pakej.filter(item =>
-        (!props.destination || item.location.toLowerCase().includes(props.destination)) &&
-        (props.pax !== 0 || item.pax === props.pax) 
-        //((!props.fromdate && !props.todate) ||
-        //  (props.fromdate >= item.dateavailablestart &&
-        //  props.todate <= item.dateavailableend))
+        (!props.destination || item.location.toLowerCase().includes(props.destination.toLowerCase())) &&
+        (props.pax === 0 || item.pax === props.pax) &&
+        (props.fromdate >= moment(item.dateavailablestart, "DD/MM/YYYY").toDate()) &&
+        (props.todate <= moment(item.dateavailableend, "DD/MM/YYYY").toDate())
       );
       setPakejResult(results);
     }
@@ -92,12 +93,20 @@ export function Pakej(props) {
                         From: {item.user}
                       </Typography>
                       <Grid container direction="row" alignItems="center" wrap="nowrap" spacing={1}>
-                        <Grid item>
+                        <Grid item sm={1}>
                           <PeopleIcon color="action" fontSize="small"/>
                         </Grid>
-                        <Grid item>
+                        <Grid item sm={2}>
                           <Typography variant="body2" color="textSecondary">
                             {item.pax}
+                          </Typography>
+                        </Grid>
+                        <Grid item sm={1}>
+                          <DateRangeIcon color="action" fontSize="small"/>
+                        </Grid>
+                        <Grid item sm={8}>
+                          <Typography variant="body2" color="textSecondary" noWrap>
+                            {item.dateavailablestart} - {item.dateavailableend}
                           </Typography>
                         </Grid>
                       </Grid>
