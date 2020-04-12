@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -171,6 +172,20 @@ export function PakejDialog() {
               </Grid>
             </MuiPickersUtilsProvider>
           </Grid>
+          <Box mt={1}/>
+          <Button
+            variant="contained"
+            component="label"
+            color="primary"
+            size="large"
+          >
+            Upload Photo
+            <input
+              accept="image/*"
+              type="file"
+              style={{ display: "none" }}
+            />
+          </Button>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} size="large" color="primary">
